@@ -11,16 +11,18 @@
       <h1>{{ title }}</h1>
       <p>Nombre: {{ nombre }}</p>
       <p>Edad: {{ edad }}</p>
-      <p *ngIf="edad>=18; else menor">Es mayor de edad.</p>
+      <p *ngIf="edad >= 18; else menor">Es mayor de edad.</p>
       <ng-template #menor><p>Es menor de edad</p></ng-template>
       <p>Email: {{ email }}</p>
-      <br/>
+      <br />
       <table border="1px solid black;">
         <tr>
           <td><span>Sueldos</span></td>
         </tr>
         <tr *ngFor="let sueldo of sueldos">
-          <td><span>{{sueldo}}</span></td>
+          <td>
+            <span>{{ sueldo }}</span>
+          </td>
         </tr>
       </table>
 
@@ -29,11 +31,34 @@
     </div>
     <div>
       <h2>Contador</h2>
-      <h3>{{contador}}</h3>
+      <h3>{{ contador }}</h3>
       <button (click)="incrementar()">Aumentar</button>
       <button (click)="decrementar()">Decrementar</button>
     </div>
+    <div>
+      <h2>Inputs:</h2>
+      <p>Ingrese su nombre, por favor:</p>
+      <input type="text" [(ngModel)]="nombre" />
+    </div>
+    <div>
+      <h2>Componentes hijos</h2>
+      <app-dado valor="{{ valor1 }}"></app-dado>
+      <app-dado valor="{{ valor2 }}"></app-dado>
+      <app-dado valor="{{ valor3 }}"></app-dado>
+      <br />
+      <br />
+      <button (click)="tirar()">Tirar</button>
+
+      <p>Resultado: {{ resultado }}</p>
+    </div>
+    <div>
+      <h2>Cronómetro</h2>
+      <app-cronometro
+        [inicio]="15"
+        (multiplo10)="actualizar($event)"
+      ></app-cronometro>
+      <p>{{ mensaje }}</p>
+    </div>
   </body>
 </html>
-
 <router-outlet></router-outlet>
